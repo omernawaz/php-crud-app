@@ -1,5 +1,14 @@
 $(document).ready(function () {
+
     $("#signup-form").hide();
+
+    var user = JSON.parse(sessionStorage.getItem('user'))
+
+    //console.log(user);
+
+    if(user != null)
+        location.replace('./dashboard.php');
+
 
     $("#btn-login").click(function (e) { 
         $("#form-header").html("Log In!");
@@ -12,5 +21,4 @@ $(document).ready(function () {
         $("#signup-form").show();
         $("#login-form").hide();
     });
-
 });

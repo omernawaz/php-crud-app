@@ -15,19 +15,18 @@ function checkAttribute($pdo, $attr, $value)
 if(isset($_POST['signup']))
 {
     $email = $_POST['email'];
-    $name = $_POST['username'];
-    $password = $_POST['password'];
+    $name = $_POST['uname'];
+    $password = $_POST['pwd'];
 
-    $api_return = array('email' => true, 'name' => true, 'password' => true);
+    $validation = array('email' => true, 'name' => true, 'password' => true);
 
     $response = checkAttribute($pdo,'email',$email);
     if(!empty($response))
-        $api_return['email'] = false;
+        $validation['email'] = false;
     
     $response = checkAttribute($pdo,'name',$name);
     if(!empty($response))
-        $api_return['name'] = false;
+        $validation['name'] = false;
 
-    echo json_encode($api_return);
 }
 ?>
