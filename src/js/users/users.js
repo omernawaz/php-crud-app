@@ -8,7 +8,8 @@ function deleteUser(user_id){
         },
         dataType: "json",
         success: function (response) {
-            location.replace('./users.php');
+            clearUsers();
+            displayUsers();
             console.log(response);
         },
         error: function (response) {
@@ -26,7 +27,8 @@ function makeAdmin(user_id){
         },
         dataType: "json",
         success: function (response) {
-            location.replace('./users.php');
+            clearUsers();
+            displayUsers();
             console.log(response);
         },
         error: function (response) {
