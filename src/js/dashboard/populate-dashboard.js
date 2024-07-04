@@ -14,5 +14,13 @@ $(document).ready(function () {
         $(".admin-control").show();
 
     $("#pfp-image").attr("src", user['pfp_path']);
+
+    let html = `
+        <div class="container-fluid justify-content-end text-white text-center">
+        <p class = 'm-3' id = 'user-greeting'></p>
+        <button class='btn btn-danger' id='btn-logout'> Logout </button>
+        </div>
+    `
+    $(".navbar").append(html);
     
 });

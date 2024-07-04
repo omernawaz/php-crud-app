@@ -62,9 +62,9 @@
 
     </div>
 
-<script src = './js/dashboard/dashboard.js'></script>
+<script src = './js/dashboard/dashboard.js' defer></script>
+<script src = './js/dashboard/dashboard-edit.js' defer></script>
 <script src = './js/dashboard/populate-dashboard.js'></script>
-<script src = './js/dashboard/dashboard-edit.js'></script>
 
 
 <?php include './inc/footer.php'?>

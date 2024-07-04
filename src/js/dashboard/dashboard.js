@@ -12,4 +12,12 @@ $(document).ready(function () {
         $("#profile-card").hide();
         $("#edit-profile-card").show();
     });
+
+    $("#btn-logout").click(function (e) { 
+        e.preventDefault();
+        sessionStorage.removeItem('user');
+        location.replace('./index.php');
+    });
+
+    
 });

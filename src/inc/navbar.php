@@ -7,31 +7,11 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link " href="#">Dashboard</a>
+                <a class="nav-link " href="../dashboard.php">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link admin-control" href="#">Edit Users</a>
+                <a class="nav-link" href="../users.php">Users</a>
             </li>
         </ul>
     </div>
-
-    <div class="container-fluid justify-content-end text-white text-center">
-        <p class = 'm-3
-        ' id = 'user-greeting'></p>
-        <button class='btn btn-danger' id='btn-logout'> Logout </button>
-    </div>
-
-    <script>
-
-        $("#btn-logout").click(function (e) { 
-        e.preventDefault();
-        sessionStorage.removeItem('user');
-        location.replace('./index.php');
-    });
-
-    </script>
-
 </nav>
