@@ -20,10 +20,10 @@ if(isset($_REQUEST['login']))
     
     if(empty($response))
         $validation['email'] = false;
-    else if($password == $response['password'])
+    else if($password == $response['password']) {
         $validation['password'] = true;
-
-    $id = $response['id'];
+        $id = $response['id'];
+    }
 }
 
 

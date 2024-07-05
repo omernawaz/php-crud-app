@@ -6,7 +6,7 @@ if(isset($_REQUEST['login']))
 {
     $response = ['status' => 'OK', 'content' => "Login Authorized"];
 
-    if(!$validation['email']) {
+    if($validation['email'] == false) {
         http_response_code(404);
         $response['status'] = 'NoSuchUser';
         $response['content'] = "Specified user does not exist";

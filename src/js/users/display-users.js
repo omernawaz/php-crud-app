@@ -1,5 +1,6 @@
 function displayUsers(filter_query)
 {
+    
     let user = JSON.parse(sessionStorage.getItem('user'));
     
     getUsers(filter_query).done(function (response){
