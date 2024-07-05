@@ -154,12 +154,11 @@ class User {
         return $validation;
     }
 
-    public static function updateUser($id, $new_email, $new_username, $new_pwd,$pfp_file ){
+    public static function updateUser($id, $new_email, $new_username, $new_pwd, $pfp_file, $entered_password){
 
         $pdo = dbHandler::getHandler();
 
         $user = self::getUser($id);
-        $entered_password = $_POST['pwd'];
 
         $auth = self::logUser($user['email'], $entered_password);
 

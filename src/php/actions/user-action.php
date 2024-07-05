@@ -37,17 +37,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             break;
 
         case 'update':
-            $id = $_POST['id'];
-            $new_email = $_POST['email'];
-            $new_username = $_POST['uname'];
-            $new_pwd = $_POST['new-pwd'];
+            
 
-
-            $pfp_file = null;
-            if(!empty($_FILES['pfp-file']['name']))
-                $pfp_file = $_FILES['pfp-file'];
-
-            $response = User::updateUser($id,$new_email,$new_username,$new_pwd,$pfp_file);
+            $response = User::updateUser($_POST['id'],$_POST['email'],$_POST['uname'],$_POST['new-pwd'],$_FILES['pfp-file'],$_POST['pwd']);
 
             http_response_code($response['code']);
             echo json_encode($response);
