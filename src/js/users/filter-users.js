@@ -2,8 +2,9 @@ function getUsers(filter_query)
 {
     return $.ajax({
         type: "POST",
-        url: "../../php/actions/get-user.php",
+        url: "../../php/actions/user-action.php",
         data: {
+            action: 'get',
             id: '*',
             filter: filter_query
         },

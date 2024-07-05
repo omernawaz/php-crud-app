@@ -34,8 +34,8 @@ function validate_input_signup(formData){
 
 function signup(formData){
 
-    formData.append('signup', true);
-    let action_url = '../../php/actions/signup.php';
+    formData.append('action', 'signup');
+    let action_url = '../../php/actions/user-action.php';
 
     return $.ajax({
         type: "POST",
@@ -51,6 +51,25 @@ function signup(formData){
       })
 }
 
+function displayError_S(error){
+
+    let response = error.responseJSON;
+    console.log(error);
+
+    if(!response['email']){
+        $("#email-s").addClass("is-invalid");
+        $("#feedback-email-s").html("Email Is Already Taken!");
+    } else {
+        $("#email-s").removeClass("is-invalid");
+    }
+
+    if(!response['name']){
+        $("#uname").addClass("is-invalid");
+        $("#feedback-uname-s").html("Username Is Already Taken!");
+    } else {
+        $("#uname").removeClass("is-invalid");
+    }
+}
 
 $(document).ready(function () {
     $("#signup-form").submit(function (e) { 
@@ -62,38 +81,11 @@ $(document).ready(function () {
 
             signup(formData).done(function (response) {
 
-                let user_id = response['id'];
-
-                $.ajax({
-                    type: "POST",
-                    url: "../../php/actions/get-user.php",
-                    data: {
-                        id: user_id
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        sessionStorage.setItem('user', JSON.stringify(response));
-                        location.replace("./dashboard.php");
-                    }
-                });
+                sessionStorage.setItem('user', JSON.stringify(response));
+                location.replace("./dashboard.php");
 
             }).fail(function (error) {
-                let response = error.responseJSON;
-
-                if(!response['email']){
-                    $("#email-s").addClass("is-invalid");
-                    $("#feedback-email-s").html("Email Is Already Taken!");
-                } else {
-                    $("#email-s").removeClass("is-invalid");
-                }
-
-                if(!response['name']){
-                    $("#uname").addClass("is-invalid");
-                    $("#feedback-uname-s").html("Username Is Already Taken!");
-                } else {
-                    $("#uname").removeClass("is-invalid");
-                }
-                    
+                displayError_S(error);
             });
         }
             

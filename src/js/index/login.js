@@ -23,13 +23,11 @@ function validate_input_login(formData){
         return false;
 }
 
-
-
 function login(formData){
 
 
-    formData.append('login', true);
-    let action_url = '../../php/actions/login.php';
+    formData.append('action', 'login');
+    let action_url = '../../php/actions/user-action.php';
 
     return $.ajax({
         type: "POST",
@@ -45,11 +43,25 @@ function login(formData){
       })
 }
 
+function displayError(error){
+    let response = error.responseJSON;
+    console.log(error);
+    if(!response['email']){
+        $("#email").addClass("is-invalid");
+        $("#feedback-email").html("No user exists on this email");
+    } else {
+        $("#email").removeClass("is-invalid");
+    }
+    if(response['email'] && !response['password']){
+        $("#pwd").addClass("is-invalid");
+        $("#feedback-pwd").html("Incorrect Password");
+    } else {
+        $("#pwd").removeClass("is-invalid");
+    }
+}
+
 
 $(document).ready(function () {
-
-
-    
 
     $("#login-form").submit(function (e) { 
         e.preventDefault();
@@ -61,37 +73,13 @@ $(document).ready(function () {
             login(formData).done(function (response) {
 
                 console.log("OK");
-                let user_id = response['id'];
+                console.log(response);
 
-                $.ajax({
-                    type: "POST",
-                    url: "../../php/actions/get-user.php",
-                    data: {
-                        id: user_id
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        sessionStorage.setItem('user', JSON.stringify(response));
-                        location.replace("./dashboard.php");
-                    }
-                });
+                sessionStorage.setItem('user', JSON.stringify(response));
+                location.replace("./dashboard.php");
                 
             }).fail(function(error ) {
-
-                let response = error.responseJSON;
-                console.log(error);
-                if(!response['email']){
-                    $("#email").addClass("is-invalid");
-                    $("#feedback-email").html("No user exists on this email");
-                } else {
-                    $("#email").removeClass("is-invalid");
-                }
-                if(response['email'] && !response['password']){
-                    $("#pwd").addClass("is-invalid");
-                    $("#feedback-pwd").html("Incorrect Password");
-                } else {
-                    $("#pwd").removeClass("is-invalid");
-                }
+                displayError(error);
             });
         }
     });

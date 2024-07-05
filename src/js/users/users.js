@@ -2,8 +2,9 @@
 function deleteUser(user_id){
     $.ajax({
         type: "POST",
-        url: "../../php/actions/delete-user.php",
+        url: "../../php/actions/user-aciton.php",
         data: {
+            action: 'delete',
             id : user_id
         },
         dataType: "json",
@@ -21,8 +22,9 @@ function deleteUser(user_id){
 function makeAdmin(user_id){
     $.ajax({
         type: "POST",
-        url: "../../php/actions/make-admin.php",
+        url: "../../php/actions/user-action.php",
         data: {
+            action: 'make-admin',
             id : user_id
         },
         dataType: "json",

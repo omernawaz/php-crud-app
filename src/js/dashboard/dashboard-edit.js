@@ -2,8 +2,9 @@ function updateSession(user_id){
 
     $.ajax({
         type: "POST",
-        url: "../../php/actions/get-user.php",
+        url: "../../php/actions/user-action.php",
         data: {
+            action: 'get',
             id: user_id
         },
         dataType: "json",
@@ -31,10 +32,12 @@ $(document).ready(function () {
         
         var formData = new FormData(this);
         formData.append('id', user['id']);
+        formData.append('action', 'update');
+
 
         $.ajax({
             type: "POST",
-            url: "../../php/actions/update-user.php",
+            url: "../../php/actions/user-action.php",
             crossDomain: true,
             data: formData,
             dataType: "json",
@@ -55,15 +58,24 @@ $(document).ready(function () {
 
           }).fail(function(error) {
                 var errorJSON = error.responseJSON;
+                console.log(error);
 
                 if(errorJSON['status'] == 'AuthError') {
+                    $("#pwd").addClass("is-invalid");
                     $("#feedback-pwd").html(errorJSON['content']);
+                } else {
+                    $("#pwd").removeClass("is-invalid");
+
                 }
-                else if(errorJSON['status'] == 'FileError') {
+
+                if(errorJSON['status'] == 'FileError') {
+                    $("#pfp").addClass("is-invalid");
                     $("#feedback-pfp").html(errorJSON['content']);
+                } else {
+                    $("#pfp").removeClass("is-invalid");
+
                 }
-                else {
-                }
+
         });
         
     });

@@ -1,10 +1,20 @@
 <?php 
-$db_host = "localhost:8889";
-$db_name = "crud-dev";
-$db_user = "omer";
-$password_file_path = "../../../db/password.txt";
 
-$db_pass = trim(file_get_contents($password_file_path));
+class dbHandler{
 
-$pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-?>
+    protected static $db_host = "localhost:8889";
+    protected static $db_name = "crud-dev";
+    protected static $db_user = "omer";
+    protected static $password_file_path = "../../../db/password.txt";
+
+    public static function getHandler(){
+
+        $dbHost = self::$db_host;
+        $dbName = self::$db_name;
+        $db_pass = trim(file_get_contents(self::$password_file_path));
+        $pdo = new PDO("mysql:host=$dbHost};dbname=$dbName", self::$db_user, $db_pass);
+        return $pdo;
+    }
+}
+
+
